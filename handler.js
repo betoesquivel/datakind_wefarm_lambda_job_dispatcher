@@ -49,11 +49,11 @@ module.exports.dispatch = (event, context, cb) => {
   let dispatching = bluebirdP.map( calls, delegate(CONSUMER_LAMBDA) , {concurrency: 500} );
 
   Promise.race([timeout, dispatching]).then(() => {
-    delegate('wefarm-job-dispatcher-dev-dispatch')();
+    //delegate('wefarm-job-dispatcher-dev-dispatch')();
     cb(null,
         { message: 'Dispatched all the calls, recurring', event })
   }).catch((e) => {
-    delegate('wefarm-job-dispatcher-dev-dispatch')();
+    //delegate('wefarm-job-dispatcher-dev-dispatch')();
     cb(e + "\n" + "Timeout, recurring");
   });
 }
